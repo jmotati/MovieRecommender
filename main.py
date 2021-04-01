@@ -1,6 +1,6 @@
 # Movie Recommender Program 
 # CNIT 481 Group Project
-#Jacob Hessler
+#Jacob Hessler, Jitesh Motati
 
 
 # import data here...
