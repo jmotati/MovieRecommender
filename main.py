@@ -11,8 +11,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # import linear kernel function from sklearn, helps create a similarity matrix (how similar two things are)
 from sklearn.metrics.pairwise import linear_kernel
 
-
-
 # import data here...
 url = 'https://raw.githubusercontent.com/jmotati/MovieRecommender/main/movies_metadata.csv'
 movie_data = pd.read_csv(url, error_bad_lines = False, low_memory = False)
@@ -45,4 +43,5 @@ def recommend_movie(title, sim_scores = sim_matrix):
     movie_indices = [i[0] for i in sim_scores]
     return movie_data['title'].iloc[movie_indices]
 
-print(recommend_movie('Toy Story'))
+movie_input = input("Please enter movie title: ")
+print(recommend_movie(movie_input))
