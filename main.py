@@ -10,8 +10,6 @@ import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
 # import linear kernel function from sklearn, helps create a similarity matrix (how similar two things are)
 from sklearn.metrics.pairwise import linear_kernel
-#import wxPython for simple GUI creation and management
-
 
 # import data here...
 url = 'https://raw.githubusercontent.com/jmotati/MovieRecommender/main/movies_metadata.csv'
@@ -45,13 +43,5 @@ def recommend_movie(title, sim_scores = sim_matrix):
     movie_indices = [i[0] for i in sim_scores]
     return movie_data['title'].iloc[movie_indices]
 
-print(recommend_movie('Toy Story'))
-
-
-
-#Create Skeleton GUI
-
-#Add text fields for existing information
-
-#Create Buttons for user input
-
+movie_input = input("Please enter movie title: ")
+print(recommend_movie(movie_input))
