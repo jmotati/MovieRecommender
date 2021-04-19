@@ -17,7 +17,7 @@ class Application:
 
         #display title label
         title_label = Label(master,
-            text = 'Movie Reccommender Application',
+            text = 'Movie Reccommendation',
             font = ('Bebas Neue', 18),
             justify="left")
         title_label.pack(pady=20)
@@ -27,7 +27,7 @@ class Application:
         txt_lbl1.pack()
         
         txt_entry = Entry(master,width=10)
-        txt_entry.pack()
+        txt_entry.pack() #TO DO - Figure out how to add input to csv dataset.
         
         #display Movie Dataset
         lbl = Label(master,
