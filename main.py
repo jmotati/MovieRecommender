@@ -10,6 +10,8 @@ import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
 # import linear kernel function from sklearn, helps create a similarity matrix (how similar two things are)
 from sklearn.metrics.pairwise import linear_kernel
+#import tkinter for GUI creation and management.
+from tkinter import *
 
 # import data here...
 url = 'https://raw.githubusercontent.com/jmotati/MovieRecommender/main/movies_metadata.csv'
