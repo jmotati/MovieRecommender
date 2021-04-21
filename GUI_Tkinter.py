@@ -3,7 +3,18 @@ class Application:
     def __init__(self, master):
     
         #program functions
+        
+        #def sort_title()
+            #read csv file
+            #display sorted data based on a title
 
+        #def sort_genre()
+            #read csv file
+            #display sorted data based on genre
+
+        #def sort_rating()
+            #read csv file
+            #display sorted data based on genre
 
         #display main frame          
         #frame = Frame(master)
