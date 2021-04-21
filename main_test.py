@@ -53,13 +53,13 @@ root = Tk()
 root.title('Movie Reccomendation Application')   
 root.minsize(900,600)
  
-name_var=StringVar()
-movie_name = Label(root)
+name_var=StringVar() #name variable
+movie_name = Label(root) #empty label for multiple sorting
 
 #program functions
 def submit():
     global movie_name #global variable
-    movie_name.destroy()
+    movie_name.destroy() #deletes variable
     txt_entry1=name_var.get()
     recommend_movie(txt_entry1)
     rec_movie = recommend_movie(txt_entry1)
