@@ -63,7 +63,6 @@ class Application:
             movie_name = Label(root, text = rec_movie, font=('calibre',20, 'bold'))
             movie_name.grid(row=5,column=5)
             name_var.set("")
-            passw_var.set("")
         #def sort_title()
             #read csv file
             #display sorted data based on a title
