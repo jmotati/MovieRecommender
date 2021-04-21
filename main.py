@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # import linear kernel function from sklearn, helps create a similarity matrix (how similar two things are)
 from sklearn.metrics.pairwise import linear_kernel
 #import tkinter for GUI creation and management.
-# from tkinter import *
+from tkinter import *
 
 # import data here...
 url = 'https://raw.githubusercontent.com/jmotati/MovieRecommender/main/movies_metadata.csv'
@@ -48,66 +48,77 @@ def recommend_movie(title, sim_scores = sim_matrix):
 # movie_input = input("Please enter movie title: ")
 # print(recommend_movie(movie_input))
 
+# GUI configurations
+root = Tk()                   
+root.title('Movie Reccomendation Application')   
+root.minsize(900,600)
+ 
+name_var=StringVar() #name variable
+movie_name = Label(root) #empty label for multiple sorting
 
-# Program to make a simple
-# login screen 
- 
- 
-import tkinter as tk
-  
-root=tk.Tk()
- 
-# setting the windows size
-root.geometry("600x400")
-  
-# declaring string variable
-# for storing name and password
-name_var=tk.StringVar()
-passw_var=tk.StringVar()
- 
-  
-# defining a function that will
-# get the name and password and
-# print them on the screen
+#program functions
 def submit():
- 
-    name=name_var.get()
-    password=passw_var.get()
-    recommend_movie(name)
-    rec_movie = recommend_movie(name)
-    movie_name = tk.Label(root, text = rec_movie, font=('calibre',20, 'bold'))
-    movie_name.grid(row=5,column=5)
-    name_var.set("")
-    passw_var.set("")
-     
-     
-# creating a label for
-# name using widget Label
-name_label = tk.Label(root, text = 'Movie Title', font=('calibre',10, 'bold'))
-  
-# creating a entry for input
-# name using widget Entry
-name_entry = tk.Entry(root,textvariable = name_var, font=('calibre',10,'normal'))
-  
-# creating a label for password
-passw_label = tk.Label(root, text = 'Password', font = ('calibre',10,'bold'))
-  
-# creating a entry for password
-passw_entry=tk.Entry(root, textvariable = passw_var, font = ('calibre',10,'normal'), show = '*')
-  
-# creating a button using the widget
-# Button that will call the submit function
-sub_btn=tk.Button(root,text = 'Submit', command = submit)
-  
-# placing the label and entry in
-# the required position using grid
-# method
-name_label.grid(row=0,column=0)
-name_entry.grid(row=0,column=1)
-passw_label.grid(row=1,column=0)
-passw_entry.grid(row=1,column=1)
-sub_btn.grid(row=2,column=1)
-  
-# performing an infinite loop
-# for the window to display
-root.mainloop()
+    global movie_name #global variable
+    movie_name.destroy() #deletes variable
+    txt_entry1=name_var.get()
+    recommend_movie(txt_entry1)
+    rec_movie = recommend_movie(txt_entry1)
+    movie_name = Label(root, text = rec_movie, font=('calibre',18, 'bold'), relief='sunken', justify='left')
+    movie_name.grid(column=4, row=4, padx=10, pady=10)
+    name_var.set("")                
+
+
+        #def sort_genre()
+            #read csv file
+            #display sorted data based on genre
+
+        #def sort_rating()
+            #read csv file
+            #display sorted data based on genre
+
+        #display main frame          
+        #frame = Frame(root)
+        #frame.pack()
+        
+#display Menu
+menu = Menu(root)
+menu.add_command(label='File')
+menu.add_command(label='About')
+root.config(menu=menu)
+        
+#Movie Title Sort
+txt_lbl1 = Label(root,text = 'Movie Title',font = ('Times New Roman', 12))
+txt_lbl1.grid(column=0, row=1)
+        
+txt_entry1 = Entry(root, width=20, textvariable = name_var)
+txt_entry1.grid(column=1, row=1) 
+
+btn1 = Button(root,text = 'Sort', command = submit) #add sort command func
+btn1.grid(column=2, row=1)
+        
+#Movie Genre Sort
+txt_lbl2 = Label(root,text = 'Movie Genre',font = ('Times New Roman', 12))
+txt_lbl2.grid(column=0, row=2)
+        
+txt_entry2 = Entry(root,width=20)
+txt_entry2.grid(column=1, row=2)
+
+btn2 = Button(root, text='Sort') #add sort command func
+btn2.grid(column=2, row=2)
+
+#Movie Rating Sort
+txt_lbl3 = Label(root,text = 'Movie Rating',font = ('Times New Roman', 12))
+txt_lbl3.grid(column=0, row=3)
+        
+txt_entry3 = Entry(root,width=20)
+txt_entry3.grid(column=1, row=3)  
+
+btn3 = Button(root, text='Sort') #add sort command func
+btn3.grid(column=2, row=3)
+
+
+#display buttons
+btn_one = Button(root, text='Exit', command=quit)
+btn_one.grid(column=0, row=10)
+      
+root.mainloop() 
