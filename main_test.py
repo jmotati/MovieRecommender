@@ -67,7 +67,6 @@ def submit():
     movie_name.grid(column=4, row=4, padx=10, pady=10)
     name_var.set("")                
 
-<<<<<<< HEAD
         #program functions
         def submit():
  
@@ -81,8 +80,6 @@ def submit():
         #def sort_title()
             #read csv file
             #display sorted data based on a title
-=======
->>>>>>> b39a32bec56ad807f77face5b2fa46f5ab1940df
 
         #def sort_genre()
             #read csv file
