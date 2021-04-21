@@ -76,6 +76,7 @@ class Application:
             #display sorted data based on genre
 
         #display main frame          
+<<<<<<< HEAD
         #frame = Frame(master)
         #frame.pack()
         
@@ -142,3 +143,50 @@ app = Application(root)
 root.title('Movie Reccomendation Application')   
 root.minsize(900,600)      
 root.mainloop()            
+=======
+        #frame = Frame(root)
+        #frame.pack()
+        
+#display Menu
+menu = Menu(root)
+menu.add_command(label='File')
+menu.add_command(label='About')
+root.config(menu=menu)
+        
+#Movie Title Sort
+txt_lbl1 = Label(root,text = 'Movie Title',font = ('Times New Roman', 12))
+txt_lbl1.grid(column=0, row=1)
+        
+txt_entry1 = Entry(root, width=20, textvariable = name_var)
+txt_entry1.grid(column=1, row=1) 
+
+btn1 = Button(root,text = 'Sort', command = submit) #add sort command func
+btn1.grid(column=2, row=1)
+        
+#Movie Genre Sort
+txt_lbl2 = Label(root,text = 'Movie Genre',font = ('Times New Roman', 12))
+txt_lbl2.grid(column=0, row=2)
+        
+txt_entry2 = Entry(root,width=20)
+txt_entry2.grid(column=1, row=2)
+
+btn2 = Button(root, text='Sort') #add sort command func
+btn2.grid(column=2, row=2)
+
+#Movie Rating Sort
+txt_lbl3 = Label(root,text = 'Movie Rating',font = ('Times New Roman', 12))
+txt_lbl3.grid(column=0, row=3)
+        
+txt_entry3 = Entry(root,width=20)
+txt_entry3.grid(column=1, row=3)  
+
+btn3 = Button(root, text='Sort') #add sort command func
+btn3.grid(column=2, row=3)
+
+
+#display buttons
+btn_one = Button(root, text='Exit', command=quit)
+btn_one.grid(column=0, row=10)
+      
+root.mainloop() 
+>>>>>>> b39a32bec56ad807f77face5b2fa46f5ab1940df
