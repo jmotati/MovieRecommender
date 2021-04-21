@@ -1,9 +1,15 @@
 from tkinter import *
 class Application:
     def __init__(self, master):
-    
+        name_var=StringVar() #define variables
+
         #program functions
-        
+        def submit(): 
+            name=name_var.get()
+            print_label = Label(master, text = name,font = ('Times New Roman', 12))
+            print_label.grid(column=0, row=4)
+            name_var.set("")
+
         #def sort_title()
             #read csv file
             #display sorted data based on a title
@@ -27,20 +33,20 @@ class Application:
         master.config(menu=menu)
 
         #display title label
-        title_label = Label(master,
+        '''title_label = Label(master,
             text = 'Movie Reccommendation',
             font = ('Bebas Neue', 18),
             justify="left")
-        title_label.grid(column=0, row=0)
+        title_label.grid(column=0, row=0)'''
         
         #Movie Title Sort
         txt_lbl1 = Label(master,text = 'Movie Title',font = ('Times New Roman', 12))
         txt_lbl1.grid(column=0, row=1)
         
-        txt_entry1 = Entry(master,width=10)
+        txt_entry1 = Entry(master, textvariable=name_var, width=10)
         txt_entry1.grid(column=1, row=1) 
 
-        btn1 = Button(master, text='Sort') #add sort command func
+        btn1 = Button(master, text='Sort', command=submit) #add sort command func
         btn1.grid(column=2, row=1)
         
         #Movie Genre Sort
@@ -66,10 +72,10 @@ class Application:
         #TO DO - Figure out how to add input to csv dataset.
 
         #display Movie Dataset
-        lbl = Label(master,
+        '''lbl = Label(master,
             text = 'Display Movie Dataset Here.',
             font = ('Times New Roman', 12))
-        lbl.grid(column=0, row=4)
+        lbl.grid(column=0, row=4)'''
 
         #display buttons
         btn_one = Button(master, text='Exit', command=quit)
