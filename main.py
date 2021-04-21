@@ -48,24 +48,25 @@ def recommend_movie(title, sim_scores = sim_matrix):
 # movie_input = input("Please enter movie title: ")
 # print(recommend_movie(movie_input))
 
+# GUI configurations
+root = Tk()                   
+root.title('Movie Reccomendation Application')   
+root.minsize(900,600)
  
-class Application:
-    def __init__(self, master):
-        name_var=StringVar()
+name_var=StringVar() #name variable
+movie_name = Label(root) #empty label for multiple sorting
 
-        #program functions
-        def submit():
- 
-            txt_entry1=name_var.get()
-            #password=passw_var.get()
-            recommend_movie(txt_entry1)
-            rec_movie = recommend_movie(txt_entry1)
-            movie_name = Label(root, text = rec_movie, font=('calibre',20, 'bold'))
-            movie_name.grid(row=5,column=5)
-            name_var.set("")
-        #def sort_title()
-            #read csv file
-            #display sorted data based on a title
+#program functions
+def submit():
+    global movie_name #global variable
+    movie_name.destroy() #deletes variable
+    txt_entry1=name_var.get()
+    recommend_movie(txt_entry1)
+    rec_movie = recommend_movie(txt_entry1)
+    movie_name = Label(root, text = rec_movie, font=('calibre',18, 'bold'), relief='sunken', justify='left')
+    movie_name.grid(column=4, row=4, padx=10, pady=10)
+    name_var.set("")                
+
 
         #def sort_genre()
             #read csv file
@@ -76,69 +77,48 @@ class Application:
             #display sorted data based on genre
 
         #display main frame          
-        #frame = Frame(master)
+        #frame = Frame(root)
         #frame.pack()
         
-        #display Menu
-        menu = Menu(master)
-        menu.add_command(label='File')
-        menu.add_command(label='About')
-        master.config(menu=menu)
-
-        #display title label
-        title_label = Label(master,
-            text = 'Movie Reccommendation',
-            font = ('Bebas Neue', 18),
-            justify="left")
-        title_label.grid(column=0, row=0)
+#display Menu
+menu = Menu(root)
+menu.add_command(label='File')
+menu.add_command(label='About')
+root.config(menu=menu)
         
-        #Movie Title Sort
-        txt_lbl1 = Label(master,text = 'Movie Title',font = ('Times New Roman', 12))
-        txt_lbl1.grid(column=0, row=1)
+#Movie Title Sort
+txt_lbl1 = Label(root,text = 'Movie Title',font = ('Times New Roman', 12))
+txt_lbl1.grid(column=0, row=1)
         
-        txt_entry1 = Entry(master, width=10, textvariable = name_var)
-        txt_entry1.grid(column=1, row=1) 
+txt_entry1 = Entry(root, width=20, textvariable = name_var)
+txt_entry1.grid(column=1, row=1) 
 
-        btn1 = Button(master, text='Sort') #add sort command func
-        btn1.grid(column=2, row=1)
+btn1 = Button(root,text = 'Sort', command = submit) #add sort command func
+btn1.grid(column=2, row=1)
         
-        #Movie Genre Sort
-        txt_lbl2 = Label(master,text = 'Movie Genre',font = ('Times New Roman', 12))
-        txt_lbl2.grid(column=0, row=2)
+#Movie Genre Sort
+txt_lbl2 = Label(root,text = 'Movie Genre',font = ('Times New Roman', 12))
+txt_lbl2.grid(column=0, row=2)
         
-        txt_entry2 = Entry(master,width=10)
-        txt_entry2.grid(column=1, row=2)
+txt_entry2 = Entry(root,width=20)
+txt_entry2.grid(column=1, row=2)
 
-        btn2 = Button(master, text='Sort') #add sort command func
-        btn2.grid(column=2, row=2)
+btn2 = Button(root, text='Sort') #add sort command func
+btn2.grid(column=2, row=2)
 
-        #Movie Rating Sort
-        txt_lbl3 = Label(master,text = 'Movie Rating',font = ('Times New Roman', 12))
-        txt_lbl3.grid(column=0, row=3)
+#Movie Rating Sort
+txt_lbl3 = Label(root,text = 'Movie Rating',font = ('Times New Roman', 12))
+txt_lbl3.grid(column=0, row=3)
         
-        txt_entry3 = Entry(master,width=10)
-        txt_entry3.grid(column=1, row=3)  
+txt_entry3 = Entry(root,width=20)
+txt_entry3.grid(column=1, row=3)  
 
-        btn3 = Button(master, text='Sort') #add sort command func
-        btn3.grid(column=2, row=3)
+btn3 = Button(root, text='Sort') #add sort command func
+btn3.grid(column=2, row=3)
 
-        sub_btn=Button(root,text = 'Submit', command = submit)
-        sub_btn.grid(column=4, row=4)
-        #TO DO - Figure out how to add input to csv dataset.
 
-        #display Movie Dataset
-        lbl = Label(master,
-            text = 'Display Movie Dataset Here.',
-            font = ('Times New Roman', 12))
-        lbl.grid(column=0, row=4)
-
-        #display buttons
-        btn_one = Button(master, text='Exit', command=quit)
-        btn_one.grid(column=0, row=10)
-
-# GUI configurations
-root = Tk()                
-app = Application(root)    
-root.title('Movie Reccomendation Application')   
-root.minsize(900,600)      
-root.mainloop()            
+#display buttons
+btn_one = Button(root, text='Exit', command=quit)
+btn_one.grid(column=0, row=10)
+      
+root.mainloop() 
