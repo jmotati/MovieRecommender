@@ -56,17 +56,12 @@ class Application:
         #program functions
         def submit():
  
-            txt_entry1=name_var.get()
-            #password=passw_var.get()
-            recommend_movie(txt_entry1)
-            rec_movie = recommend_movie(txt_entry1)
+            title=name_var.get()
+            recommend_movie(title)
+            rec_movie = recommend_movie(title)
             movie_name = Label(root, text = rec_movie, font=('calibre',20, 'bold'))
             movie_name.grid(row=5,column=5)
             name_var.set("")
-            passw_var.set("")
-        #def sort_title()
-            #read csv file
-            #display sorted data based on a title
 
         #def sort_genre()
             #read csv file
