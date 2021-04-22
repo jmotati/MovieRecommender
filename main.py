@@ -70,11 +70,6 @@ def rec_movie_ml():
     movie_name.grid(column=4, row=4, padx=10, pady=10)
     name_var.set("")                
 
-
-        #def sort_genre()
-            #read csv file
-            #display sorted data based on genre
-
         #def sort_rating()
             #read csv file
             #display sorted data based on genre
