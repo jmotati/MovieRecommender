@@ -19,6 +19,7 @@ movie_data = pd.read_csv(url, error_bad_lines = False, low_memory = False)
 
 # clean data
 clean_df = movie_data[['title', 'overview', 'vote_average', 'vote_count']]
+ratings_df = movie_data[['title', 'vote_average']]
 #print(clean_df)
 
 # remove words such as 'the' 'a', etc to make it easier to recommend
@@ -54,11 +55,18 @@ root.title('Movie Reccomendation Application')
 root.minsize(900,600)
  
 name_var=StringVar() #name variable
+genre_var=StringVar()
+rand_mov_var=StringVar()
 movie_name = Label(root) #empty label for multiple sorting
+rand_mov = Label(root)
+mov_genre = Label(root)
 
 #program functions
-def submit():
+# movie recommendation with ML
+def rec_movie_ml():
     global movie_name #global variable
+    mov_genre.destroy()
+    rand_mov.destroy()
     movie_name.destroy() #deletes variable
     txt_entry1=name_var.get()
     recommend_movie(txt_entry1)
@@ -67,24 +75,6 @@ def submit():
     movie_name.grid(column=4, row=4, padx=10, pady=10)
     name_var.set("")                
 
-        #program functions
-        def submit():
- 
-            txt_entry1=name_var.get()
-            #password=passw_var.get()
-            recommend_movie(txt_entry1)
-            rec_movie = recommend_movie(txt_entry1)
-            movie_name = Label(root, text = rec_movie, font=('calibre',20, 'bold'))
-            movie_name.grid(row=5,column=5)
-            name_var.set("")
-        #def sort_title()
-            #read csv file
-            #display sorted data based on a title
-
-        #def sort_genre()
-            #read csv file
-            #display sorted data based on genre
-
         #def sort_rating()
             #read csv file
             #display sorted data based on genre
@@ -92,7 +82,34 @@ def submit():
         #display main frame          
         #frame = Frame(root)
         #frame.pack()
-        
+
+# movie recommendation based on true randomness
+def rand_movie():
+    
+    global rand_mov #global variable
+    mov_genre.destroy()
+    rand_mov.destroy()
+    movie_name.destroy() #deletes variable
+    #txt_entry2=rand_mov_var.get()
+    row_select = clean_df.sample()
+    rand_mov = Label(root, text = row_select, font=('calibre',18, 'bold'), relief='sunken', justify='left')
+    rand_mov.grid(column=4, row=4, padx=10, pady=10)
+    #rand_mov_var.set("")
+
+def genre_sort():
+
+    global mov_genre #global variable
+    mov_genre.destroy()
+    rand_mov.destroy()
+    movie_name.destroy() #deletes variable
+    #txt_entry2=rand_mov_var.get()
+    genre_entry=genre_var.get()
+    #sorted_df = ratings_df.sort_values(by='vote_average', ascending=False,na_position='first')
+    sorted_df = ratings_df.nlargest(10,'vote_average')
+    mov_genre = Label(root, text = sorted_df, font=('calibre',18, 'bold'), relief='sunken', justify='left')
+    mov_genre.grid(column=4, row=4, padx=(100, 10))
+    genre_var.set("")  
+
 #display Menu
 menu = Menu(root)
 menu.add_command(label='File')
@@ -106,27 +123,27 @@ txt_lbl1.grid(column=0, row=1)
 txt_entry1 = Entry(root, width=20, textvariable = name_var)
 txt_entry1.grid(column=1, row=1) 
 
-btn1 = Button(root,text = 'Sort', command = submit) #add sort command func
+btn1 = Button(root,text = 'Recommennd', command = rec_movie_ml) #add sort command func
 btn1.grid(column=2, row=1)
         
 #Movie Genre Sort
-txt_lbl2 = Label(root,text = 'Movie Genre',font = ('Times New Roman', 12))
+txt_lbl2 = Label(root,text = 'Recommend Random Movie',font = ('Times New Roman', 12))
 txt_lbl2.grid(column=0, row=2)
         
-txt_entry2 = Entry(root,width=20)
-txt_entry2.grid(column=1, row=2)
+#txt_entry2 = Entry(root,width=20, textvariable = rand_mov_var)
+#txt_entry2.grid(column=1, row=2)
 
-btn2 = Button(root, text='Sort') #add sort command func
+btn2 = Button(root, text='Generate', command = rand_movie) #add sort command func
 btn2.grid(column=2, row=2)
 
 #Movie Rating Sort
-txt_lbl3 = Label(root,text = 'Movie Rating',font = ('Times New Roman', 12))
+txt_lbl3 = Label(root,text = 'Top Rated Movies',font = ('Times New Roman', 12))
 txt_lbl3.grid(column=0, row=3)
         
-txt_entry3 = Entry(root,width=20)
-txt_entry3.grid(column=1, row=3)  
+#txt_entry3 = Entry(root,width=20, textvariable = genre_var)
+#txt_entry3.grid(column=1, row=3)  
 
-btn3 = Button(root, text='Sort') #add sort command func
+btn3 = Button(root, text='Show', command = genre_sort) #add sort command func
 btn3.grid(column=2, row=3)
 
 
@@ -135,4 +152,3 @@ btn_one = Button(root, text='Exit', command=quit)
 btn_one.grid(column=0, row=10)
       
 root.mainloop() 
-         
