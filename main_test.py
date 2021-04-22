@@ -55,7 +55,6 @@ root.title('Movie Reccomendation Application')
 root.minsize(900,600)
  
 name_var=StringVar() #name variable
-genre_var=StringVar()
 rand_mov_var=StringVar()
 movie_name = Label(root) #empty label for multiple sorting
 rand_mov = Label(root)
@@ -73,7 +72,7 @@ def rec_movie_ml():
     rec_movie = recommend_movie(txt_entry1)
     movie_name = Label(root, text = rec_movie, font=('calibre',18, 'bold'), relief='sunken', justify='left')
     movie_name.grid(column=4, row=4, padx=10, pady=10)
-    name_var.set("")                
+    name_var.set("")           
 
         #def sort_rating()
             #read csv file
@@ -96,14 +95,13 @@ def rand_movie():
     rand_mov.grid(column=4, row=4, padx=10, pady=10)
     #rand_mov_var.set("")
 
-def genre_sort():
+def rating_sort():
 
     global mov_genre #global variable
     mov_genre.destroy()
     rand_mov.destroy()
     movie_name.destroy() #deletes variable
     #txt_entry2=rand_mov_var.get()
-    genre_entry=genre_var.get()
     #sorted_df = ratings_df.sort_values(by='vote_average', ascending=False,na_position='first')
     sorted_df = ratings_df.nlargest(10,'vote_average')
     mov_genre = Label(root, text = sorted_df, font=('calibre',18, 'bold'), relief='sunken', justify='left')
@@ -143,7 +141,7 @@ txt_lbl3.grid(column=0, row=3)
 #txt_entry3 = Entry(root,width=20, textvariable = genre_var)
 #txt_entry3.grid(column=1, row=3)  
 
-btn3 = Button(root, text='Show', command = genre_sort) #add sort command func
+btn3 = Button(root, text='Show', command = rating_sort) #add sort command func
 btn3.grid(column=2, row=3)
 
 
