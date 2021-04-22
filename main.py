@@ -19,6 +19,7 @@ movie_data = pd.read_csv(url, error_bad_lines = False, low_memory = False)
 
 # clean data
 clean_df = movie_data[['title', 'overview', 'vote_average', 'vote_count']]
+ratings_df = movie_data[['title', 'vote_average']]
 #print(clean_df)
 
 # remove words such as 'the' 'a', etc to make it easier to recommend
@@ -59,17 +60,20 @@ genre_var=StringVar()
 movie_name = Label(root) #empty label for multiple sorting
 rand_mov = Label(root)
 genre_list = Label(root)
+mov_rating = Label(root)
+
 #program functions
 # movie recommendation with ML
 def rec_movie_ml():
     global movie_name #global variable
     rand_mov.destroy()
     movie_name.destroy() #deletes variable
+    mov_rating.destroy()
     txt_entry1=name_var.get()
     recommend_movie(txt_entry1)
     rec_movie = recommend_movie(txt_entry1)
     movie_name = Label(root, text = rec_movie, font=('calibre',18, 'bold'), relief='sunken', justify='left')
-    movie_name.grid(column=4, row=4, padx=10, pady=10)
+    movie_name.grid(column=4, row=5, padx=10, pady=10)
     name_var.set("")                
 
         #def sort_rating()
@@ -86,10 +90,11 @@ def rand_movie():
     global rand_mov #global variable
     movie_name.destroy()
     rand_mov.destroy() #deletes variable
+    mov_rating.destroy()
     #txt_entry2=rand_mov_var.get()
     row_select = clean_df.sample()
     rand_mov = Label(root, text = row_select, font=('calibre',18, 'bold'), relief='sunken', justify='left')
-    rand_mov.grid(column=4, row=4, padx=10, pady=10)
+    rand_mov.grid(column=4, row=5, padx=10, pady=10)
     #rand_mov_var.set("")  
 
 def show_genre():
@@ -97,13 +102,27 @@ def show_genre():
     movie_name.destroy()
     rand_mov.destroy()
     genre_list.destroy()
+    mov_rating.destroy()
 
     # store list of movies from specified genre
     txt_entry3 = name_var.get()
     genre_mov_list = clean_df[txt_entry3].tolist()
     genre_list = Label(root, text = genre_mov_list, font=('calibre',18, 'bold'), relief='sunken', justify='left')
-    genre_list.grid(column=4, row=4, padx=10, pady=10)
+    genre_list.grid(column=4, row=5, padx=10, pady=10)
     genre_var.set("") 
+
+def rating_sort():
+
+    global mov_rating #global variable
+    mov_rating.destroy()
+    rand_mov.destroy()
+    movie_name.destroy() #deletes variable
+    #txt_entry2=rand_mov_var.get()
+    #sorted_df = ratings_df.sort_values(by='vote_average', ascending=False,na_position='first')
+    sorted_df = ratings_df.nlargest(10,'vote_average')
+    mov_rating = Label(root, text = sorted_df, font=('calibre',18, 'bold'), relief='sunken', justify='left')
+    mov_rating.grid(column=4, row=5, padx=(100, 10))
+
 #display Menu
 menu = Menu(root)
 menu.add_command(label='File')
@@ -139,6 +158,12 @@ txt_entry3.grid(column=1, row=3)
 
 btn3 = Button(root, text='Sort', command = show_genre) #add sort command func
 btn3.grid(column=2, row=3)
+
+txt_lbl4 = Label(root,text = 'Top Rated Movies',font = ('Times New Roman', 12))
+txt_lbl4.grid(column=0, row=4)
+
+btn4 = Button(root, text='Show', command = rating_sort) #add sort command func
+btn4.grid(column=2, row=4)
 
 
 #display buttons
