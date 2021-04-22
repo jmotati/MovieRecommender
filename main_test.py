@@ -12,6 +12,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 #import tkinter for GUI creation and management.
 from tkinter import *
+from tkinter import messagebox
 
 # import data here...
 url = 'https://raw.githubusercontent.com/jmotati/MovieRecommender/main/movies_metadata.csv'
@@ -107,10 +108,14 @@ def rating_sort():
     mov_rating = Label(root, text = sorted_df, font=('calibre',18, 'bold'), relief='sunken', justify='left')
     mov_rating.grid(column=4, row=4, padx=(100, 10))
 
+def about():
+    about_text = 'Movie Reccomendation Application\nCreated by Jacob Hessler and Jistesh Motati\nThanks for Checking it Out!'
+    messagebox.showinfo("About", about_text)
+
 #display Menu
 menu = Menu(root)
 menu.add_command(label='File')
-menu.add_command(label='About')
+menu.add_command(label='About', command=about)
 root.config(menu=menu)
         
 #Movie Title Sort
