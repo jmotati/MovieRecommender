@@ -106,7 +106,7 @@ def show_genre():
     mov_rating.destroy()
 
     # store list of movies from specified genre
-    txt_entry3 = name_var.get()
+    txt_entry3 = genre_var.get()
     genre_mov_list = clean_df[txt_entry3].tolist()
     genre_list = Label(root, text = genre_mov_list, font=('calibre',18, 'bold'), relief='sunken', justify='left')
     genre_list.grid(column=4, row=5, padx=10, pady=10)
