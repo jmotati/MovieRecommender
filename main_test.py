@@ -19,6 +19,7 @@ movie_data = pd.read_csv(url, error_bad_lines = False, low_memory = False)
 
 # clean data
 clean_df = movie_data[['title', 'overview', 'vote_average', 'vote_count']]
+ratings_df = movie_data[['title', 'vote_average']]
 #print(clean_df)
 
 # remove words such as 'the' 'a', etc to make it easier to recommend
@@ -103,9 +104,10 @@ def genre_sort():
     movie_name.destroy() #deletes variable
     #txt_entry2=rand_mov_var.get()
     genre_entry=genre_var.get()
-    sorted_df = clean_df.sort_values(by=['vote_average'], ascending=False)
+    #sorted_df = ratings_df.sort_values(by='vote_average', ascending=False,na_position='first')
+    sorted_df = ratings_df.nlargest(10,'vote_average')
     mov_genre = Label(root, text = sorted_df, font=('calibre',18, 'bold'), relief='sunken', justify='left')
-    mov_genre.grid(column=4, row=4, padx=40, pady=10)
+    mov_genre.grid(column=4, row=4, padx=(100, 10))
     genre_var.set("")  
 
 #display Menu
