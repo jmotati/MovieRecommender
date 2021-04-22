@@ -55,8 +55,10 @@ root.minsize(900,600)
  
 name_var=StringVar() #name variable
 rand_mov_var=StringVar()
+genre_var=StringVar()
 movie_name = Label(root) #empty label for multiple sorting
 rand_mov = Label(root)
+genre_list = Label(root)
 #program functions
 # movie recommendation with ML
 def rec_movie_ml():
@@ -95,6 +97,18 @@ def rand_movie():
     rand_mov.grid(column=4, row=4, padx=10, pady=10)
     #rand_mov_var.set("")  
 
+def show_genre():
+    global genre_list
+    movie_name.destroy()
+    rand_mov.destroy()
+    genre_list.destroy()
+
+    # store list of movies from specified genre
+    txt_entry3 = name_var.get()
+    genre_mov_list = clean_df[txt_entry3].tolist()
+    genre_list = Label(root, text = genre_mov_list, font=('calibre',18, 'bold'), relief='sunken', justify='left')
+    genre_list.grid(column=4, row=4, padx=10, pady=10)
+    genre_var.set("") 
 #display Menu
 menu = Menu(root)
 menu.add_command(label='File')
@@ -122,13 +136,13 @@ btn2 = Button(root, text='Generate', command = rand_movie) #add sort command fun
 btn2.grid(column=2, row=2)
 
 #Movie Rating Sort
-txt_lbl3 = Label(root,text = 'Movie Rating',font = ('Times New Roman', 12))
+txt_lbl3 = Label(root,text = 'Enter Genre',font = ('Times New Roman', 12))
 txt_lbl3.grid(column=0, row=3)
         
-txt_entry3 = Entry(root,width=20)
+txt_entry3 = Entry(root,width=20, textvariable = genre_var)
 txt_entry3.grid(column=1, row=3)  
 
-btn3 = Button(root, text='Sort') #add sort command func
+btn3 = Button(root, text='Sort', command = show_genre) #add sort command func
 btn3.grid(column=2, row=3)
 
 
